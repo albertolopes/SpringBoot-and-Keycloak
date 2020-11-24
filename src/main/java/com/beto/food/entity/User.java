@@ -1,9 +1,12 @@
 package com.beto.food.entity;
 
 import com.beto.food.entity.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -33,4 +36,8 @@ public class User {
 
     @Column(name = "txt_image")
     private String urlImage;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Address> addresses = new ArrayList<>();
 }
