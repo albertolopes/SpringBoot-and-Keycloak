@@ -7,7 +7,6 @@ import com.beto.food.exception.ObjectAlreadyExistsException;
 import com.beto.food.exception.ObjectNotFoundException;
 import com.beto.food.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.representations.AccessToken;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +20,7 @@ public class UserService {
     private final AuthenticationConfig authenticationConfig;
 
     public User salvar(User user) {
+        authenticationConfig.getLoggedUser();
         validateUserInsert(user);
         user.setId(null);
         return repository.save(user);
