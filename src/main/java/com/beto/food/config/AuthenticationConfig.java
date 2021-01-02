@@ -30,6 +30,11 @@ public class AuthenticationConfig {
         return security;
     }
 
+    public AccessToken getKeycloakUser(){
+        AccessToken access = getSecurityContext().getToken();
+        return access;
+    }
+
     public boolean hasRole(String role) {
         AccessToken.Access access = getSecurityContext().getToken().getRealmAccess();
         Set<String> roles = access.getRoles();

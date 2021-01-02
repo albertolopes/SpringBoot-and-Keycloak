@@ -122,12 +122,6 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/",
                         "/h2/*",
-                        "/lib/*",
-                        "/css/*",
-                        "/fonts/*",
-                        "/images/*",
-                        "/o2c.html",
-                        "index.html",
                         "/webjars/**",
                         "/api-docs/*",
                         "/v1/api-docs",
@@ -135,12 +129,10 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                         "/swagger-ui.js",
                         "/swagger-ui.html",
                         "/swagger-ui.min.js",
-                        "/swagger-resources/**",
-                        "/sso/login",
-                        "/v1/user"
+                        "/swagger-resources/**"
                 ).permitAll()
-                .antMatchers("/actuator/**")
-                .access("hasRole('ACTUATOR')")
+                .antMatchers()
+                .access("hasRole('ADMIMN')")
                 .anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .csrf().disable()
