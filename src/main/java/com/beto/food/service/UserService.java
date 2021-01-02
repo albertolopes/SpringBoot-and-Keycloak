@@ -1,6 +1,5 @@
 package com.beto.food.service;
 
-import com.beto.food.config.AuthenticationConfig;
 import com.beto.food.entity.User;
 import com.beto.food.exception.DataIntegrityException;
 import com.beto.food.exception.ObjectAlreadyExistsException;
@@ -17,10 +16,8 @@ public class UserService {
 
     private final UserRepository repository;
 
-    private final AuthenticationConfig authenticationConfig;
-
     public User salvar(User user) {
-        authenticationConfig.getLoggedUser();
+
         validateUserInsert(user);
         user.setId(null);
         return repository.save(user);
