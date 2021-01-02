@@ -17,6 +17,7 @@ public class UserService {
     private final UserRepository repository;
 
     public User salvar(User user) {
+
         validateUserInsert(user);
         user.setId(null);
         return repository.save(user);

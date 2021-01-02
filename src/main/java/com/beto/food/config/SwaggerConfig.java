@@ -1,5 +1,6 @@
 package com.beto.food.config;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,10 +9,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -54,4 +59,14 @@ public class SwaggerConfig {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
+    private List<ResponseMessage> globalResponses() {
+        return Lists.newArrayList(
+                new ResponseMessageBuilder().code(500).message("Internal Error").build()
+                , new ResponseMessageBuilder().code(400).message("Invalid date").build()
+                , new ResponseMessageBuilder().code(401).message("User do not was authenticated").build()
+                , new ResponseMessageBuilder().code(403).message("User without permission for this operation").build()
+        );
+    }
+
 }
